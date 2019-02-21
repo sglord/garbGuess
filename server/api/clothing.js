@@ -4,31 +4,83 @@ module.exports = router;
 
 router.get('/', async (req, res, next) => {
 	try {
-		const clothing = await Clothing
-			.findAll
-			// {
-			// explicitly select only the id and email fields - even though
-			// users' passwords are encrypted, it won't help if we just
-			// send everything to anyone who asks!
-			// attributes: ['id', 'email']
-			// }
-			();
+		const clothing = await Clothing.findAll();
 		res.json(clothing);
 	} catch (err) {
 		next(err);
 	}
 });
 
-// router.get('/', async (req, res, next) => {
-// 	try {
-// 		const users = await Clothing.findOne({
-// 			// explicitly select only the id and email fields - even though
-// 			// users' passwords are encrypted, it won't help if we just
-// 			// send everything to anyone who asks!
-// 			attributes: ['id', 'email']
-// 		});
-// 		res.json(users);
-// 	} catch (err) {
-// 		next(err);
-// 	}
-// });
+router.get('/pants', async (req, res, next) => {
+	try {
+		const users = await Clothing.findOne({
+			where: {
+				type: 'pants'
+			}
+		});
+		res.json(users);
+	} catch (err) {
+		next(err);
+	}
+});
+
+router.get('/coat', async (req, res, next) => {
+	try {
+		const users = await Clothing.findOne({
+			where: {
+				type: 'coat'
+			}
+		});
+		res.json(users);
+	} catch (err) {
+		next(err);
+	}
+});
+
+router.get('/shoes', async (req, res, next) => {
+	try {
+		const users = await Clothing.findOne({
+			where: {
+				type: 'shoes'
+			}
+		});
+		res.json(users);
+	} catch (err) {
+		next(err);
+	}
+});
+
+router.get('/shirt', async (req, res, next) => {
+	try {
+		const users = await Clothing.findOne({
+			where: {
+				type: 'shirt'
+			}
+		});
+		res.json(users);
+	} catch (err) {
+		next(err);
+	}
+});
+
+router.get('/hat', async (req, res, next) => {
+	try {
+		const users = await Clothing.findOne({
+			where: {
+				type: 'hat'
+			}
+		});
+		res.json(users);
+	} catch (err) {
+		next(err);
+	}
+});
+
+router.post('/', async (req, res, next) => {
+	try {
+		const newClothing = await Clothing.create(req.body);
+		res.status(200).send(newClothing);
+	} catch (error) {
+		next(error);
+	}
+});

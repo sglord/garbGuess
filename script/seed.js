@@ -15,7 +15,7 @@ async function seed() {
 			imgUrl: 'pants.url'
 		}),
 		Clothing.create({
-			type: 'shirts',
+			type: 'shirt',
 			warmth: 'medium',
 			occasion: 'casual',
 			imgUrl: 'pants.url'
