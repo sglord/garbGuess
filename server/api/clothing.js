@@ -11,11 +11,28 @@ router.get('/', async (req, res, next) => {
 	}
 });
 
-router.get('/pants', async (req, res, next) => {
+//clothing type
+router.get('/:type', async (req, res, next) => {
+	console.log(req.params.type);
 	try {
 		const users = await Clothing.findOne({
 			where: {
-				type: 'pants'
+				type: `${req.params.type}`
+			}
+		});
+		res.json(users);
+	} catch (err) {
+		next(err);
+	}
+});
+//clothing type and warmth level
+router.get('/:type/warmth/:level', async (req, res, next) => {
+	console.log(req.params.level);
+	try {
+		const users = await Clothing.findOne({
+			where: {
+				type: `${req.params.type}`,
+				warmth: `${req.params.level}`
 			}
 		});
 		res.json(users);
@@ -24,50 +41,14 @@ router.get('/pants', async (req, res, next) => {
 	}
 });
 
-router.get('/coat', async (req, res, next) => {
+router.get('/:type/warmth/:level/occasion/:dress', async (req, res, next) => {
+	console.log(req.params.dress);
 	try {
 		const users = await Clothing.findOne({
 			where: {
-				type: 'coat'
-			}
-		});
-		res.json(users);
-	} catch (err) {
-		next(err);
-	}
-});
-
-router.get('/shoes', async (req, res, next) => {
-	try {
-		const users = await Clothing.findOne({
-			where: {
-				type: 'shoes'
-			}
-		});
-		res.json(users);
-	} catch (err) {
-		next(err);
-	}
-});
-
-router.get('/shirt', async (req, res, next) => {
-	try {
-		const users = await Clothing.findOne({
-			where: {
-				type: 'shirt'
-			}
-		});
-		res.json(users);
-	} catch (err) {
-		next(err);
-	}
-});
-
-router.get('/hat', async (req, res, next) => {
-	try {
-		const users = await Clothing.findOne({
-			where: {
-				type: 'hat'
+				type: `${req.params.type}`,
+				warmth: `${req.params.level}`,
+				occasion: `${req.params.dress}`
 			}
 		});
 		res.json(users);
