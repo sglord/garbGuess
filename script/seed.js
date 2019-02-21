@@ -1,18 +1,40 @@
 'use strict';
 
 const db = require('../server/db');
-const { User } = require('../server/db/models');
+const { Clothing } = require('../server/db/models');
 
 async function seed() {
 	await db.sync({ force: true });
 	console.log('db synced!');
 
-	const users = await Promise.all([
-		User.create({ email: 'cody@email.com', password: '123' }),
-		User.create({ email: 'murphy@email.com', password: '123' })
+	const clothing = await Promise.all([
+		Clothing.create({
+			type: 'pants',
+			warmth: 'light',
+			occasion: 'formal',
+			imgUrl: 'pants.url'
+		}),
+		Clothing.create({
+			type: 'shirts',
+			warmth: 'medium',
+			occasion: 'casual',
+			imgUrl: 'pants.url'
+		}),
+		Clothing.create({
+			type: 'hat',
+			warmth: 'heavy',
+			occasion: 'smart',
+			imgUrl: 'hat.url'
+		}),
+		Clothing.create({
+			type: 'shoes',
+			warmth: 'medium',
+			occasion: 'casual',
+			imgUrl: 'shoes.url'
+		})
 	]);
 
-	console.log(`seeded ${users.length} users`);
+	console.log(`seeded ${clothing.length} `);
 	console.log(`seeded successfully`);
 }
 
