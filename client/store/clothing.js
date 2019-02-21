@@ -38,7 +38,7 @@ const initialState = {};
 export default function(state = initialState, action) {
 	switch (action.type) {
 		case SET_CLOTHING:
-			return action.shirt;
+			return { clothing: action.clothing };
 		default:
 			return state;
 	}

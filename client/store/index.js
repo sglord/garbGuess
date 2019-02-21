@@ -4,7 +4,7 @@ import thunkMiddleware from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import clothing from './clothing';
 
-const reducer = combineReducers({ clothing });
+const reducer = clothing;
 const middleware = composeWithDevTools(
 	applyMiddleware(thunkMiddleware, createLogger({ collapsed: true }))
 );

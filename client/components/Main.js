@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import fetchClothing from '../store/clothing';
-import { Container, Button } from 'semantic-ui-react';
+import { Container, Button, Divider } from 'semantic-ui-react';
 
 class Main extends Component {
 	constructor() {
@@ -13,95 +13,119 @@ class Main extends Component {
 		};
 	}
 
-	handleSubmit(evt) {
-		evt.preventDefault();
+	handleSubmit() {
 		let { type, warmth, occasion } = this.state;
-		this.props.selectClothing(type, warmth, occasion);
+		this.props.fetchClothing(type, warmth, occasion);
 	}
 
-	handleSelection(evt) {
-		this.setState({ [evt.target.name]: evt.target.value });
+	handleSelection(kind, evt) {
+		this.setState({ [`${kind}`]: evt.target.name });
 	}
-
-	handleButtonClick(evt) {
-		console.log(evt.target);
-	}
-
 	render() {
 		return (
-			<div>
-				<p> item type:</p>
+			<Container>
+				<p> Clothing type:</p>
 				<Button.Group>
 					<Button
-						kind="type"
 						name="hat"
 						onClick={evt => {
-							this.handleButtonClick(evt);
+							this.handleSelection('type', evt);
 						}}>
-						hat
+						Hat
 					</Button>
 					<Button.Or />
 
 					<Button
 						name="shirt"
 						onClick={evt => {
-							this.handleButtonClick(evt);
+							this.handleSelection('type', evt);
 						}}>
-						shirt
+						Shirt
 					</Button>
 					<Button.Or />
 
 					<Button
 						name="pants"
 						onClick={evt => {
-							this.handleButtonClick(evt);
+							this.handleSelection('type', evt);
 						}}>
-						pants
+						Pants
 					</Button>
 					<Button.Or />
 
 					<Button
 						name="shoes"
 						onClick={evt => {
-							this.handleButtonClick(evt);
+							this.handleSelection('type', evt);
 						}}>
-						shoes
+						Shoes
 					</Button>
 				</Button.Group>
-				<p> warmth level:</p>
+				<p> Warmth Level:</p>
 				<div>
 					<Button.Group>
 						<Button
 							name="light"
 							onClick={evt => {
-								this.handleButtonClick(evt);
+								this.handleSelection('warmth', evt);
 							}}>
-							light
+							Light
 						</Button>
 						<Button.Or />
 
 						<Button
 							name="medium"
 							onClick={evt => {
-								this.handleButtonClick(evt);
+								this.handleSelection('warmth', evt);
 							}}>
-							medium
+							Medium
 						</Button>
 						<Button.Or />
 
 						<Button
 							name="heavy"
 							onClick={evt => {
-								this.handleButtonClick(evt);
+								this.handleSelection('warmth', evt);
 							}}>
-							heavy
+							Heavy
 						</Button>
 					</Button.Group>
 				</div>
-				<Button size="huge" onClick={() => this.handleSubmit}>
+				<p>Occasion:</p>
+				<div>
+					<Button.Group>
+						<Button
+							name="casual"
+							onClick={evt => {
+								this.handleSelection('occasion', evt);
+							}}>
+							Casual
+						</Button>
+						<Button.Or />
+
+						<Button
+							name="smart"
+							onClick={evt => {
+								this.handleSelection('occasion', evt);
+							}}>
+							Smart
+						</Button>
+						<Button.Or />
+
+						<Button
+							name="formal"
+							onClick={evt => {
+								this.handleSelection('occasion', evt);
+							}}>
+							Formal
+						</Button>
+					</Button.Group>
+				</div>
+				<Divider hidden />
+				<Button size="huge" onClick={() => this.handleSubmit()}>
 					Submit
 				</Button>
-			</div>
+			</Container>
 		);
 	}
 }
@@ -114,7 +138,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
 	return {
-		selectClothing: (type, warmth, occasion) =>
+		fetchClothing: (type, warmth, occasion) =>
 			dispatch(fetchClothing(type, warmth, occasion))
 	};
 };
