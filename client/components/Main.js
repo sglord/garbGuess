@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import fetchClothing from '../store/clothing';
+import { fetchClothing } from '../store/clothing';
 import { Container, Button, Divider } from 'semantic-ui-react';
 
 class Main extends Component {
@@ -15,6 +15,7 @@ class Main extends Component {
 
 	handleSubmit() {
 		let { type, warmth, occasion } = this.state;
+		console.log(this.state);
 		this.props.fetchClothing(type, warmth, occasion);
 	}
 

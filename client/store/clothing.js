@@ -21,7 +21,7 @@ const setClothing = clothing => ({ type: SET_CLOTHING, clothing });
 export const fetchClothing = (type, warmth, occasion) => async dispatch => {
 	try {
 		const { data } = await axios.get(
-			`'/:${type}/warmth/:${warmth}/occasion/:${occasion}'`
+			`/api/clothing/${type}/warmth/${warmth}/occasion/${occasion}`
 		);
 		dispatch(setClothing(data));
 	} catch (error) {
